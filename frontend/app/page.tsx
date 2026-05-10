@@ -143,6 +143,7 @@ export default function FeedPage() {
                   wrap("save", () => postFeedback(item.listing_id, item.is_saved ? "unsave" : "save"))
                 }
                 onHide={() => wrap("hide", () => postFeedback(item.listing_id, "hide"))}
+                onUnhide={() => wrap("unhide", () => postFeedback(item.listing_id, "unhide"))}
               />
             ))}
           </div>
@@ -160,6 +161,7 @@ export default function FeedPage() {
           wrap("save", () => postFeedback(selectedId, detail?.is_saved ? "unsave" : "save"))
         }
         onHide={() => selectedId && wrap("hide", () => postFeedback(selectedId, "hide"))}
+        onUnhide={() => selectedId && wrap("unhide", () => postFeedback(selectedId, "unhide"))}
       />
     </>
   );

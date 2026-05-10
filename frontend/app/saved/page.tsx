@@ -64,6 +64,7 @@ export default function SavedPage() {
                 }}
                 onSave={() => wrap(() => postFeedback(item.listing_id, item.is_saved ? "unsave" : "save"))}
                 onHide={() => wrap(() => postFeedback(item.listing_id, "hide"))}
+                onUnhide={() => wrap(() => postFeedback(item.listing_id, "unhide"))}
               />
             ))}
           </div>
@@ -79,6 +80,7 @@ export default function SavedPage() {
           selectedId && wrap(() => postFeedback(selectedId, detail?.is_saved ? "unsave" : "save"))
         }
         onHide={() => selectedId && wrap(() => postFeedback(selectedId, "hide"))}
+        onUnhide={() => selectedId && wrap(() => postFeedback(selectedId, "unhide"))}
       />
     </>
   );

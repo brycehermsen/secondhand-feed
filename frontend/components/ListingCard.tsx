@@ -19,9 +19,10 @@ type Props = {
   onOpen: () => void;
   onSave: () => void;
   onHide: () => void;
+  onUnhide: () => void;
 };
 
-export function ListingCard({ item, onOpen, onSave, onHide }: Props) {
+export function ListingCard({ item, onOpen, onSave, onHide, onUnhide }: Props) {
   const watch = item.watchouts_json[0];
 
   return (
@@ -45,6 +46,7 @@ export function ListingCard({ item, onOpen, onSave, onHide }: Props) {
           <Badge variant={verdictVariant(item.verdict)}>{item.verdict.replace(/_/g, " ")}</Badge>
           <Badge variant="outline">{item.score_total}/50</Badge>
           {item.is_saved ? <Badge variant="secondary">Saved</Badge> : null}
+          {item.is_hidden ? <Badge variant="outline">Hidden</Badge> : null}
         </div>
         <div>
           <p className="text-xs uppercase text-muted-foreground">{item.brand_display ?? "Brand unknown"}</p>
@@ -77,8 +79,8 @@ export function ListingCard({ item, onOpen, onSave, onHide }: Props) {
         <Button size="sm" variant="outline" onClick={onSave}>
           {item.is_saved ? "Unsave" : "Save"}
         </Button>
-        <Button size="sm" variant="ghost" onClick={onHide}>
-          Hide
+        <Button size="sm" variant="ghost" onClick={item.is_hidden ? onUnhide : onHide}>
+          {item.is_hidden ? "Unhide" : "Hide"}
         </Button>
       </CardFooter>
     </Card>

@@ -18,6 +18,7 @@ type Props = {
   onRescore: () => void;
   onSaveToggle: () => void;
   onHide: () => void;
+  onUnhide: () => void;
 };
 
 export function ListingDetailSheet({
@@ -28,6 +29,7 @@ export function ListingDetailSheet({
   onRescore,
   onSaveToggle,
   onHide,
+  onUnhide,
 }: Props) {
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -50,6 +52,7 @@ export function ListingDetailSheet({
               <div className="flex flex-wrap gap-2 pb-3">
                 <Badge>{detail.verdict_label}</Badge>
                 <Badge variant="outline">{detail.score_total}/50</Badge>
+                {detail.is_hidden ? <Badge variant="secondary">Hidden</Badge> : null}
                 {detail.hard_reject_reason ? <Badge variant="destructive">Hard reject</Badge> : null}
               </div>
               <div className="space-y-1 text-sm">
@@ -115,8 +118,8 @@ export function ListingDetailSheet({
               <Button size="sm" variant="outline" onClick={onSaveToggle}>
                 {detail.is_saved ? "Unsave" : "Save"}
               </Button>
-              <Button size="sm" variant="ghost" onClick={onHide}>
-                Hide
+              <Button size="sm" variant="ghost" onClick={detail.is_hidden ? onUnhide : onHide}>
+                {detail.is_hidden ? "Unhide" : "Hide"}
               </Button>
               {detail.source_url ? (
                 <a
