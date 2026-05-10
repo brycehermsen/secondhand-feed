@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from app.domain.models.enums import DesignLevel, MakeQualityLevel, MaterialLevel, PriceRead, Verdict
+from app.domain.models.enums import DesignLevel, FitRead, MakeQualityLevel, MaterialLevel, PriceRead, Verdict
 from app.domain.models.evaluation import Evaluation
 from app.domain.models.feed_item import FeedItem
 from app.domain.models.listing import Listing
@@ -64,6 +64,18 @@ def human_price_read(read: str) -> str:
     }[pr]
 
 
+def human_fit_read(read: str) -> str:
+    try:
+        fr = FitRead(read)
+    except ValueError:
+        return read.replace("_", " ").title()
+    return {
+        FitRead.GOOD: "Good fit vs profile",
+        FitRead.UNCERTAIN: "Uncertain fit",
+        FitRead.BAD: "Poor fit vs profile",
+    }[fr]
+
+
 def human_verdict(v: str) -> str:
     try:
         verdict = Verdict(v)
@@ -102,7 +114,7 @@ def project_feed_item(
         make_quality_label=human_make(listing.make_quality_level),
         material_label=human_material(listing.material_level),
         price_label=human_price_read(evaluation.price_read),
-        fit_label=evaluation.fit_read.replace("_", " "),
+        fit_label=human_fit_read(evaluation.fit_read),
         condition_label=evaluation.condition_read,
         brand_read=evaluation.brand_read,
         why_json=why,

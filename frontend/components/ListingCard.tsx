@@ -57,13 +57,15 @@ export function ListingCard({ item, onOpen, onSave, onHide }: Props) {
           {item.size_display ? <span>Size {item.size_display}</span> : null}
           {item.source_marketplace ? <span className="capitalize">{item.source_marketplace}</span> : null}
         </div>
-        <div className="grid grid-cols-2 gap-1 text-[11px]">
-          <span>{item.design_label}</span>
-          <span>{item.make_quality_label}</span>
-          <span>{item.material_label}</span>
-          <span>{item.price_label}</span>
-          <span>{item.fit_label}</span>
-          <span className="line-clamp-2">{item.condition_label}</span>
+        <div className="grid grid-cols-2 gap-1 text-[11px] leading-snug">
+          <span title="Design">{item.design_label}</span>
+          <span title="Make">{item.make_quality_label}</span>
+          <span title="Material">{item.material_label}</span>
+          <span title="Price read">{item.price_label}</span>
+          <span title="Fit read">{item.fit_label}</span>
+          <span title="Condition read" className="line-clamp-2">
+            {item.condition_label}
+          </span>
         </div>
         {item.why_json[0] ? <p className="line-clamp-3 text-foreground/90">{item.why_json[0]}</p> : null}
         {watch ? <p className="text-amber-700 dark:text-amber-400">Watch-out: {watch}</p> : null}

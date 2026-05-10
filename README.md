@@ -4,9 +4,18 @@ Local Docker app for a curated secondhand clothing feed: hexagonal FastAPI backe
 
 ## Quick start
 
+**Option A — Docker** (start Docker Desktop first so the daemon is running):
+
 ```bash
 cp .env.example .env
 docker compose up --build
+```
+
+**Option B — no Docker** (same behavior, good for WSL when Docker isn’t integrated):
+
+```bash
+chmod +x scripts/dev-local.sh
+./scripts/dev-local.sh
 ```
 
 - App: http://localhost:3000
@@ -34,6 +43,13 @@ If credentials are unset, only the fake source is available.
 - **Adapters**: SQLite repos, YAML profile store, source connectors.
 - **BFF**: thin FastAPI routes and presenters.
 
+**Smoke test (API only, backend must be running)**
+
+```bash
+chmod +x scripts/smoke-check.sh
+API_BASE=http://127.0.0.1:8000 ./scripts/smoke-check.sh
+```
+
 ## Development without Docker
 
 **Backend**
@@ -42,8 +58,9 @@ If credentials are unset, only the fake source is available.
 cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
-export DATA_DIR=../data DATABASE_PATH=../data/app.db PROFILE_PATH=../data/buyer_style_profile.yaml
-uvicorn app.main:app --reload --port 8000
+export DATABASE_PATH=../data/app.db PROFILE_PATH=../data/buyer_style_profile.yaml
+export FAKE_FIXTURE_PATH="$(pwd)/app/adapters/sources/fixtures/fake_listings.json"
+PYTHONPATH=. uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 **Frontend**
