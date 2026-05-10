@@ -1,0 +1,109 @@
+version: 1
+
+goal:
+  description: "Look very good on a budget using secondhand clothing."
+  precision_over_recall: true
+  manual_review_required: true
+
+sizes:
+  tops:
+    likely_sizes: ["M", "L", "40", "42", "EU 50", "EU 52"]
+  jackets:
+    likely_sizes: ["M", "L", "40", "42", "EU 50", "EU 52"]
+  pants:
+    likely_sizes: ["32", "33", "34", "EU 48", "EU 50"]
+  shoes:
+    likely_sizes: ["US 10.5", "US 11", "UK 10", "EU 44"]
+
+brands:
+  target:
+    - "Drake's"
+    - "RRL"
+  credible_non_target:
+    - "Inis Meain"
+    - "Wythe"
+  reputation_watchlist: []
+  excluded:
+    - "Factory"
+    - "Replica"
+    - "Dupe"
+
+categories:
+  high_priority:
+    - "knitwear"
+    - "overshirts"
+    - "chore coats"
+    - "casual jackets"
+    - "outerwear"
+  medium_priority:
+    - "shirts"
+    - "trousers"
+    - "denim"
+    - "loafers"
+    - "boots"
+  low_priority:
+    - "t-shirts"
+    - "shorts"
+    - "accessories"
+
+aesthetic:
+  likes:
+    - "natural materials"
+    - "texture"
+    - "interesting but wearable shapes"
+    - "quietly distinctive pieces"
+    - "good proportions"
+  dislikes:
+    - "loud logos"
+    - "generic mall-brand basics"
+    - "hypebeast styling"
+    - "bad slim-fit 2010s cuts"
+    - "cheap synthetic sheen"
+    - "novelty design"
+
+price_bands:
+  knitwear:
+    normal_good_under: 100
+    special_good_under: 200
+    stretch_under: 300
+  overshirts_chore_coats:
+    normal_good_under: 100
+    special_good_under: 200
+    stretch_under: 300
+  casual_jackets:
+    normal_good_under: 150
+    special_good_under: 300
+    stretch_under: 450
+  outerwear:
+    normal_good_under: 200
+    special_good_under: 400
+    stretch_under: 700
+  shirts:
+    normal_good_under: 60
+    special_good_under: 125
+    stretch_under: 200
+  trousers:
+    normal_good_under: 80
+    special_good_under: 175
+    stretch_under: 275
+  shoes:
+    normal_good_under: 150
+    special_good_under: 300
+    stretch_under: 500
+
+condition:
+  minimum: "very_good"
+  reject_terms:
+    - "stain"
+    - "hole"
+    - "moth"
+    - "heavy wear"
+    - "as is"
+    - "needs repair"
+    - "damaged"
+
+learned_fit_notes: {}
+learned_brand_notes: {}
+learned_price_notes: {}
+examples_liked: []
+examples_disliked: []
