@@ -1,4 +1,4 @@
-CREATE TABLE sources (
+CREATE TABLE IF NOT EXISTS sources (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   source_type TEXT NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE sources (
   updated_at TEXT
 );
 
-CREATE TABLE source_runs (
+CREATE TABLE IF NOT EXISTS source_runs (
   id TEXT PRIMARY KEY,
   source_id TEXT NOT NULL,
   status TEXT NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE source_runs (
   logs_json TEXT
 );
 
-CREATE TABLE listings (
+CREATE TABLE IF NOT EXISTS listings (
   id TEXT PRIMARY KEY,
   source_marketplace TEXT,
   canonical_url TEXT UNIQUE,
@@ -54,7 +54,7 @@ CREATE TABLE listings (
   raw_json TEXT
 );
 
-CREATE TABLE evaluations (
+CREATE TABLE IF NOT EXISTS evaluations (
   listing_id TEXT PRIMARY KEY,
   verdict TEXT,
   score_total INTEGER,
@@ -82,7 +82,7 @@ CREATE TABLE evaluations (
   hard_reject_reason TEXT
 );
 
-CREATE TABLE feed_items (
+CREATE TABLE IF NOT EXISTS feed_items (
   listing_id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   brand_display TEXT,
@@ -108,7 +108,7 @@ CREATE TABLE feed_items (
   last_updated_at TEXT
 );
 
-CREATE TABLE user_feedback (
+CREATE TABLE IF NOT EXISTS user_feedback (
   id TEXT PRIMARY KEY,
   listing_id TEXT,
   action TEXT,
